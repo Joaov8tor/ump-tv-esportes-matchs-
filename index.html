@@ -5,33 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ump TV Esportes TCS</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body, html {
       width: 100%;
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      overflow: hidden;
       background: #000;
       color: #fff;
+      overflow-x: hidden;
     }
 
-    /* ======= ANIMAÇÃO DE ABERTURA ======= */
+    /* ======= INTRO ANIMADA ======= */
     .intro {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: radial-gradient(circle at center, #001933, #000);
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
+      justify-content: center;
+      align-items: center;
       animation: fadeOut 4s ease-in-out forwards;
       animation-delay: 4s;
       z-index: 10;
@@ -54,19 +47,9 @@
       animation: fadeIn 2s 1.5s forwards;
     }
 
-    @keyframes shine {
-      0% { background-position: 0%; }
-      100% { background-position: 300%; }
-    }
-
-    @keyframes fadeOut {
-      0%, 70% { opacity: 1; }
-      100% { opacity: 0; visibility: hidden; }
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
+    @keyframes shine {0%{background-position:0%;}100%{background-position:300%;}}
+    @keyframes fadeOut {0%,70%{opacity:1;}100%{opacity:0;visibility:hidden;}}
+    @keyframes fadeIn {to{opacity:1;}}
 
     /* ======= FUNDO ANIMADO ======= */
     .bg {
@@ -83,48 +66,25 @@
       width: 300px;
       height: 300px;
       border-radius: 50%;
-      background: rgba(0, 195, 255, 0.2);
+      background: rgba(0,195,255,0.2);
       filter: blur(100px);
       animation: move 10s infinite alternate ease-in-out;
     }
+    .light:nth-child(1){top:10%;left:20%;animation-delay:0s;}
+    .light:nth-child(2){top:60%;left:60%;background:rgba(0,123,255,0.2);animation-delay:2s;}
+    .light:nth-child(3){top:40%;left:80%;background:rgba(0,255,195,0.2);animation-delay:4s;}
+    @keyframes move {0%{transform:translate(0,0)scale(1);}100%{transform:translate(100px,-50px)scale(1.2);}}
 
-    .light:nth-child(1) {
-      top: 10%;
-      left: 20%;
-      animation-delay: 0s;
-    }
-    .light:nth-child(2) {
-      top: 60%;
-      left: 60%;
-      background: rgba(0, 123, 255, 0.2);
-      animation-delay: 2s;
-    }
-    .light:nth-child(3) {
-      top: 40%;
-      left: 80%;
-      background: rgba(0, 255, 195, 0.2);
-      animation-delay: 4s;
-    }
-
-    @keyframes move {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(100px, -50px) scale(1.2); }
-    }
-
-    /* ======= CONTEÚDO PRINCIPAL ======= */
+    /* ======= CONTEÚDO ======= */
     main {
       display: none;
       text-align: center;
-      position: relative;
-      z-index: 2;
       padding-top: 100px;
+      z-index: 2;
+      position: relative;
       animation: appear 1s ease-in-out forwards;
     }
-
-    @keyframes appear {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes appear {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
     header {
       font-size: 2em;
@@ -135,22 +95,27 @@
 
     .agenda {
       margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
     }
 
     .jogo {
-      display: inline-block;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       padding: 25px 40px;
       border-radius: 20px;
       border: 2px solid #00c3ff;
-      box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+      box-shadow: 0 0 20px rgba(0,195,255,0.4);
       animation: pulse 3s infinite;
+      width: 90%;
+      max-width: 700px;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 20px rgba(0, 195, 255, 0.4); }
-      50% { box-shadow: 0 0 40px rgba(0, 195, 255, 0.7); }
-      100% { box-shadow: 0 0 20px rgba(0, 195, 255, 0.4); }
+      0% { box-shadow: 0 0 20px rgba(0,195,255,0.4); }
+      50% { box-shadow: 0 0 40px rgba(0,195,255,0.7); }
+      100% { box-shadow: 0 0 20px rgba(0,195,255,0.4); }
     }
 
     .times {
@@ -161,8 +126,8 @@
     }
 
     .time img {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       border: 3px solid #00c3ff;
       object-fit: cover;
@@ -175,15 +140,8 @@
       margin: 0 10px;
     }
 
-    .info {
-      margin-top: 15px;
-      color: #ccc;
-    }
-
-    .canal {
-      margin-top: 40px;
-    }
-
+    .info { margin-top: 15px; color: #ccc; }
+    .canal { margin-top: 40px; }
     .canal a {
       text-decoration: none;
       background: linear-gradient(90deg, #007bff, #00c3ff);
@@ -193,7 +151,6 @@
       font-size: 18px;
       transition: 0.3s;
     }
-
     .canal a:hover {
       background: linear-gradient(90deg, #00c3ff, #007bff);
       box-shadow: 0 0 20px #00c3ff;
@@ -217,23 +174,102 @@
     <header>Agenda de Hoje</header>
 
     <section class="agenda">
+
+      <!-- JOGO 1 -->
       <div class="jogo">
         <div class="times">
           <div class="time">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/Esporte_Clube_Bahia_logo.svg" alt="Bahia">
-            <p>Bahia</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Cruzeiro_Esporte_Clube_logo.svg" alt="Cruzeiro">
+            <p>Cruzeiro</p>
           </div>
           <div class="versus">X</div>
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/14/Fortaleza_EC_logo.svg" alt="Fortaleza">
+            <p>Fortaleza</p>
+          </div>
+        </div>
+        <div class="info">
+          <p>⚽ Jogo às <strong>14:00</strong></p>
+          <p>Transmissão exclusiva na Ump TV Esportes TCS</p>
+        </div>
+      </div>
+
+      <!-- JOGO 2 -->
+      <div class="jogo">
+        <div class="times">
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Flamengo_logo.svg" alt="Flamengo">
+            <p>Flamengo</p>
+          </div>
+          <div class="versus">X</div>
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/Esporte_Clube_Juventude_logo.svg" alt="Juventude">
+            <p>Juventude</p>
+          </div>
+        </div>
+        <div class="info">
+          <p>⚽ Jogo às <strong>15:30</strong></p>
+          <p>Transmissão exclusiva na Ump TV Esportes TCS</p>
+        </div>
+      </div>
+
+      <!-- JOGO 3 -->
+      <div class="jogo">
+        <div class="times">
           <div class="time">
             <img src="https://upload.wikimedia.org/wikipedia/commons/3/31/Clube_Atl%C3%A9tico_Mineiro_logo.svg" alt="Atlético MG">
             <p>Atlético MG</p>
           </div>
+          <div class="versus">X</div>
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Vasco_da_Gama_crest.svg" alt="Vasco">
+            <p>Vasco</p>
+          </div>
         </div>
         <div class="info">
-          <p>⚽ Jogo às <strong>21:30</strong></p>
-          <p>Transmissão exclusiva na Ump TV Esportes TCS / nao tera transmissao error 364 </p>
+          <p>⚽ Jogo às <strong>17:00</strong></p>
+          <p>Transmissão exclusiva na Ump TV Esportes TCS</p>
         </div>
       </div>
+
+      <!-- JOGO 4 -->
+      <div class="jogo">
+        <div class="times">
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Corinthians_logo.svg" alt="Corinthians">
+            <p>Corinthians</p>
+          </div>
+          <div class="versus">X</div>
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Mirassol_FC_logo.svg" alt="Mirassol">
+            <p>Mirassol</p>
+          </div>
+        </div>
+        <div class="info">
+          <p>⚽ Jogo às <strong>18:30</strong></p>
+          <p>Transmissão exclusiva na Ump TV Esportes TCS</p>
+        </div>
+      </div>
+
+      <!-- JOGO 5 -->
+      <div class="jogo">
+        <div class="times">
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Sao_Paulo_FC_logo.svg" alt="São Paulo">
+            <p>São Paulo</p>
+          </div>
+          <div class="versus">X</div>
+          <div class="time">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Santos_logo.svg" alt="Santos">
+            <p>Santos</p>
+          </div>
+        </div>
+        <div class="info">
+          <p>⚽ Jogo às <strong>20:00</strong></p>
+          <p>Transmissão exclusiva na Ump TV Esportes TCS</p>
+        </div>
+      </div>
+
     </section>
 
     <div class="canal">
@@ -242,7 +278,7 @@
   </main>
 
   <script>
-    // Exibe o conteúdo principal após a animação
+    // Mostra o conteúdo após a intro
     setTimeout(() => {
       document.querySelector('.intro').style.display = 'none';
       document.querySelector('main').style.display = 'block';
