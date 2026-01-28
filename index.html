@@ -1,94 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Site Indisponível</title>
-  <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#ff6b6b;
-      --text:#e6eef8;
-      --muted:rgba(230,238,248,.6);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
-      background:
-        radial-gradient(1200px 600px at 10% 10%, rgba(255,107,107,0.06), transparent 8%),
-        linear-gradient(180deg,#071022 0%, var(--bg) 100%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:24px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UMP TV – Transmissão Ao Vivo</title>
 
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.04);
-      backdrop-filter: blur(6px);
-      padding:36px;
-      border-radius:14px;
-      max-width:920px;
-      width:100%;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      text-align:center;
-    }
+<style>
+body {
+  margin: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
 
-    h1{
-      font-size: clamp(20px, 3.6vw, 40px);
-      letter-spacing: -0.02em;
-      margin-bottom:12px;
-    }
+.player-container {
+  width: 90%;
+  max-width: 960px;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+}
 
-    p.lead{
-      font-size: clamp(14px, 2.0vw, 18px);
-      color:var(--muted);
-      margin-bottom:22px;
-    }
-
-    .status{
-      display:inline-block;
-      padding:14px 20px;
-      border-radius:10px;
-      background:linear-gradient(90deg, rgba(255,107,107,0.12), rgba(255,107,107,0.06));
-      color:var(--accent);
-      font-weight:700;
-      letter-spacing:0.02em;
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
-    }
-
-    .small{
-      margin-top:18px;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    @keyframes float {
-      0%{transform:translateY(0)}
-      50%{transform:translateY(-6px)}
-      100%{transform:translateY(0)}
-    }
-
-    .card{animation:float 6s ease-in-out infinite}
-    footer{margin-top:18px;color:rgba(230,238,248,0.35);font-size:12px}
-  </style>
+.player-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+</style>
 </head>
+
 <body>
-  <main class="card" role="main" aria-labelledby="title">
-    <h1 id="title">Este site foi tirado do ar</h1>
-    <p class="lead">Sem tempo pra volta :</p>
 
-    <!-- Mensagem principal pedida -->
-    <div class="status" role="status" aria-live="polite">Tempo indeterminado</div>
-
-    <p class="small">Se precisar, volte mais tarde ou entre em contato com o administrador.</p>
-    <footer>© <!-- opcional: nome do site --> 2025</footer>
-  </main>
-</body>
-</html>
+<div class="player-container">
+  <iframe
+    src="https://www.youtube.com/embed/LLEtuDRcqCE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&origin=https://example.com"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
