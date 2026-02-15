@@ -2,42 +2,179 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UMP TV – Transmissão Ao Vivo</title>
+<title>Live Ultra</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
 body {
   margin: 0;
-  background: #000;
+  font-family: 'Poppins', sans-serif;
+  background: black;
+  overflow: hidden;
+  color: white;
+}
+
+/* Ambilight fundo */
+.ambilight {
+  position: fixed;
+  inset: -20%;
+  background: radial-gradient(circle at center, #1a1a1a, #000);
+  filter: blur(120px) saturate(1.4);
+  animation: ambiMove 12s infinite alternate ease-in-out;
+  z-index: -2;
+}
+
+@keyframes ambiMove {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.2) rotate(10deg); }
+}
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Indicador ao vivo */
+.live-dot {
+  width: 12px;
+  height: 12px;
+  background: red;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#titulo {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Player area */
+.player-wrapper {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-family: Arial, sans-serif;
+  padding: 20px;
 }
 
-.player-container {
+.player {
   width: 90%;
-  max-width: 960px;
-  aspect-ratio: 16 / 9;
-  border-radius: 14px;
+  height: 90%;
+  border-radius: 20px;
   overflow: hidden;
-  background: #000;
+  position: relative;
+
+  /* Glow cinematográfico */
+  box-shadow:
+    0 0 40px rgba(0,0,0,0.9),
+    0 0 120px rgba(0,0,0,0.7),
+    0 0 80px rgba(255,255,255,0.05);
 }
 
-.player-container iframe {
+/* Upscaling visual + HDR simulation */
+iframe {
   width: 100%;
   height: 100%;
-  border: 0;
+  border: none;
+
+  filter:
+    contrast(1.18)
+    brightness(1.06)
+    saturate(1.2);
+
+  transform: scale(1.02);
+  will-change: transform;
+  backface-visibility: hidden;
 }
+
+/* Overlay nitidez */
+.player::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.35);
+}
+
+/* Borda animada premium */
+.player::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, red, orange, red);
+  z-index: -1;
+  filter: blur(12px);
+  opacity: 0.5;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="player-container">
-  <iframe
-    src="https://www.youtube.com/embed/LLEtuDRcqCE?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&origin=https://example.com"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
+<div class="ambilight"></div>
+
+<div class="container">
+
+  <div class="topbar">
+    <div class="live-dot"></div>
+    <div>AO VIVO</div>
+    <div id="titulo">Carregando...</div>
+  </div>
+
+  <div class="player-wrapper">
+    <div class="player">
+      <iframe
+        id="ytplayer"
+        src="https://www.youtube.com/embed/irYe4-FBazo?autoplay=1&mute=1&enablejsapi=1&vq=hd720&rel=0&modestbranding=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('ytplayer', {
+    events: {
+      'onReady': pegarTitulo
+    }
+  });
+}
+
+function pegarTitulo() {
+  const data = player.getVideoData();
+  document.getElementById("titulo").innerText = data.title;
+}
+</script>
+
+</body>
+</html>
